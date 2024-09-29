@@ -1,45 +1,45 @@
+// Menu.js
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Menu = React.memo(({ alerts }) => {
-  if (alerts.length === 0) {
-    return (
-      <View style={styles.menu}>
-        <Text style={styles.noAlerts}>Nenhum alerta criado.</Text>
-      </View>
-    );
-  }
-
+const Menu = ({ onClose, onThemeChange }) => {
   return (
-    <View style={styles.menu}>
-      {alerts.map((alert, index) => (
-        <Text key={index} style={styles.menuItem}>
-          Alarme: {alert.color} às {alert.time}
-        </Text>
-      ))}
-    </View>
+    <TouchableOpacity style={styles.overlay} onPress={onClose}>
+      <View style={styles.menu}>
+        <TouchableOpacity onPress={() => alert('Sobre')}>
+          <Text style={styles.menuItem}>Sobre</Text>
+        </TouchableOpacity>
+
+        
+
+        <TouchableOpacity onPress={onThemeChange}>
+          <Text style={styles.menuItem}>Alterar Tema</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => alert('Sair')}>
+          <Text style={styles.menuItem}>Sair</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
   );
-});
+};
 
 const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   menu: {
+    width: 250,
+    backgroundColor: '#fff',
     padding: 20,
-    backgroundColor: '#FFD700', // Amarelo de alto contraste
-    borderRadius: 10,
-    marginTop: 10, // Espaço abaixo da Navbar
-    marginBottom: 20,
-    alignItems: 'center', // Centraliza os itens horizontalmente
+    borderRadius: 10,   
   },
   menuItem: {
-    fontSize: 18,
-    marginBottom: 10, // Espaço entre os itens do menu
-    color: '#000000', // Preto para máximo contraste
-    textAlign: 'center', // Centraliza o texto
-  },
-  noAlerts: {
-    fontSize: 18,
-    color: '#000000',
-    textAlign: 'center',
+    fontSize: 20,
+    marginVertical: 10,
   },
 });
 

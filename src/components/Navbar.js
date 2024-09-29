@@ -1,19 +1,43 @@
 // Navbar.js
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Ícone de hambúrguer
+import Menu from './Menu'; // Importando o novo componente Menu
 
 const Navbar = () => {
+  const [menuVisible, setMenuVisible] = useState(false);
+
   const handleMenuPress = () => {
-    alert('Menu pressionado!');
+    setMenuVisible(!menuVisible);
+  };
+
+  const closeMenu = () => {
+    setMenuVisible(false);
+  };
+
+  const handleThemeChange = () => {
+    alert('Alterando o tema do alarme!');
+    closeMenu(); // Fecha o menu após alterar o tema
   };
 
   return (
-    <View style={styles.navbar}>
-      <TouchableOpacity onPress={handleMenuPress} style={styles.hamburgerButton}>
-        <Ionicons name="menu" size={36} color="#fff" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Alerta Amigo</Text>
+    <View>
+      <View style={styles.navbar}>
+        <TouchableOpacity onPress={handleMenuPress} style={styles.hamburgerButton}>
+          <Ionicons name="menu" size={36} color="#fff" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Alerta Amigo</Text>
+      </View>
+
+      {/* Menu Modal */}
+      <Modal
+        transparent={true}
+        visible={menuVisible}
+        animationType="slide"
+        onRequestClose={closeMenu}
+      >
+        <Menu onClose={closeMenu} onThemeChange={handleThemeChange} />
+      </Modal>
     </View>
   );
 };
