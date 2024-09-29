@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Navbar from './src/components/Navbar';
 import FloatingButton from './src/components/FloatingButton';
 import AlertForm from './src/components/AlertForm';
 import CardAlert from './src/components/CardAlert';
+import LoadingScreen from './src/components/LoadingScreen'; // Novo componente
 
 const App = () => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [alerts, setAlerts] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Simula o fim do carregamento após 3 segundos
+    }, 3000);
+  }, []);
 
   const handleButtonPress = () => {
     setFormVisible(!isFormVisible);
@@ -37,15 +45,21 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Navbar />
-      <CardAlert alerts={alerts} onEdit={handleEdit} />
-      <FloatingButton onPress={handleButtonPress} />
-      {isFormVisible && (
-        <AlertForm
-          onSubmit={handleSubmit}
-          onCancel={handleCancel}
-          initialData={editIndex !== null ? alerts[editIndex] : null}
-        />
+      {isLoading ? (
+        <LoadingScreen /> // Exibe a tela de carregamento com a logo do app
+      ) : (
+        <>
+          <Navbar />
+          <CardAlert alerts={alerts} onEdit={handleEdit} />
+          <FloatingButton onPress={handleButtonPress} />
+          {isFormVisible && (
+            <AlertForm
+              onSubmit={handleSubmit}
+              onCancel={handleCancel}
+              initialData={editIndex !== null ? alerts[editIndex] : null}
+            />
+          )}
+        </>
       )}
     </View>
   );
