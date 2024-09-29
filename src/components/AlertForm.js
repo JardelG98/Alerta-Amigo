@@ -1,15 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, Alert, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, Alert, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 const colors = [
-  { name: 'Vermelho', value: '#FF0000' },
-  { name: 'Verde', value: '#008000' },
-  { name: 'Azul', value: '#0000FF' },
-  { name: 'Amarelo', value: '#FFFF00' },
-  { name: 'Laranja', value: '#FFA500' },
-  { name: 'Roxo', value: '#800080' },
-  { name: 'Ciano', value: '#00FFFF' },
-  { name: 'Magenta', value: '#FF00FF' },
+    { name: 'Vermelho', value: '#FF0000' },
+    { name: 'Verde', value: '#008000' },
+    { name: 'Azul', value: '#0000FF' },
+    { name: 'Amarelo', value: '#FFFF00' },
+    { name: 'Laranja', value: '#FFA500' },
+    { name: 'Roxo', value: '#800080' },
+    { name: 'Ciano', value: '#00FFFF' },
+    { name: 'Magenta', value: '#FF00FF' },
+    { name: 'Cinza', value: '#808080' },
+    { name: 'Preto', value: '#000000' },
+    { name: 'Branco', value: '#FFFFFF' },
+    { name: 'Marrom', value: '#A52A2A' },
+    { name: 'Ouro', value: '#FFD700' },
+    { name: 'Prata', value: '#C0C0C0' },
+    { name: 'Rosa', value: '#FFC0CB' },
+    { name: 'Lilás', value: '#D8BFD8' },
+    { name: 'Verde Claro', value: '#90EE90' },
+    { name: 'Azul Claro', value: '#ADD8E6' },
+    { name: 'Pêssego', value: '#FFDAB9' },
+    { name: 'Salmon', value: '#FA8072' },
+    { name: 'Vinho', value: '#800000' },
+    { name: 'Bordô', value: '#800020' },
+    { name: 'Turquesa', value: '#40E0D0' },
+    { name: 'Coral', value: '#FF7F50' },
+    { name: 'Verde Limão', value: '#32CD32' },
+    { name: 'Verde Musgo', value: '#8B8B00' },
+    { name: 'Bege', value: '#F5F5DC' },
+    { name: 'Dourado', value: '#FFD700' },
+    { name: 'Ameixa', value: '#8E4B91' },
+    { name: 'Azul Turquesa', value: '#00CED1' },
+    { name: 'Menta', value: '#98FF98' },
+    { name: 'Azul Royal', value: '#4169E1' },
+    { name: 'Lavanda', value: '#E6E6FA' },
+    { name: 'Verde Floresta', value: '#228B22' },
 ];
 
 const AlertForm = ({ onSubmit, onCancel, initialData }) => {
@@ -66,17 +92,21 @@ const AlertForm = ({ onSubmit, onCancel, initialData }) => {
         style={[styles.colorPicker, { backgroundColor: color || '#f0f0f0' }]}
         onPress={() => setColor('')}
       >
-        <Text style={styles.colorText}>{color || 'Selecione uma cor'}</Text>
+        <Text style={styles.}>{color || 'Selecione uma cor'}</Text>
       </TouchableOpacity>
-      <View style={styles.colorGrid}>
-        {colors.map((c) => (
-          <TouchableOpacity
-            key={c.value}
-            style={[styles.colorBox, { backgroundColor: c.value }]}
-            onPress={() => setColor(c.value)}
-          />
-        ))}
-      </View>
+      
+      {/* Adicionando uma barra de rolagem */}
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <View style={styles.colorGrid}>
+          {colors.map((c) => (
+            <TouchableOpacity
+              key={c.value} // Aqui, usando o valor da cor como chave única
+              style={[styles.colorBox, { backgroundColor: c.value }]}
+              onPress={() => setColor(c.value)}
+            />
+          ))}
+        </View>
+      </ScrollView>
 
       <Text style={styles.label}>Hora do Alerta (HH:MM)</Text>
       <TextInput
@@ -136,7 +166,7 @@ const styles = StyleSheet.create({
   },
   colorGrid: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap', // Alterado para não quebrar em linhas
     marginBottom: 15,
   },
   colorBox: {
