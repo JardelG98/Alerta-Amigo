@@ -92,7 +92,7 @@ const AlertForm = ({ onSubmit, onCancel, initialData }) => {
         style={[styles.colorPicker, { backgroundColor: color || '#f0f0f0' }]}
         onPress={() => setColor('')}
       >
-        <Text style={styles.}>{color || 'Selecione uma cor'}</Text>
+        <Text style={styles.colorText}>{color || 'Selecione uma cor'}</Text>
       </TouchableOpacity>
       
       {/* Adicionando uma barra de rolagem */}
