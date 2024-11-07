@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "my-project",
-    "slug": "my-project",
+    "name": "Alerta Amigo",
+    "slug": "Alerta_Amigo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/alarme.png",
     "userInterfaceStyle": "light",
    
     "ios": {
@@ -12,7 +12,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/alarme.png",
         "backgroundColor": "#ffffff"
       }
     },

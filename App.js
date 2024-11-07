@@ -43,6 +43,11 @@ const App = () => {
     setFormVisible(true);
   };
 
+  // Função para deletar um alerta com base no índice
+  const handleDelete = (index) => {
+    setAlerts((prevAlerts) => prevAlerts.filter((_, i) => i !== index));
+  };
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -50,7 +55,7 @@ const App = () => {
       ) : (
         <>
           <Navbar />
-          <CardAlert alerts={alerts} onEdit={handleEdit} />
+          <CardAlert alerts={alerts} onEdit={handleEdit} onDelete={handleDelete} />
           <FloatingButton onPress={handleButtonPress} />
           {isFormVisible && (
             <AlertForm

@@ -7,12 +7,11 @@ const CardAlert = React.memo(({ alerts, onEdit, onDelete }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalColor, setModalColor] = useState(null);
   const [alertName, setAlertName] = useState("");
-  const [sound, setSound] = useState(null); // Estado para armazenar o som
 
   useEffect(() => {
     const interval = setInterval(() => {
       checkAlarms();
-    }, 60000); // Checa a cada 30 segundos
+    }, 30000); // Checa a cada 30 segundos
 
     return () => clearInterval(interval); // Limpa o intervalo quando o componente é desmontado
   }, [alerts]);
@@ -38,16 +37,10 @@ const CardAlert = React.memo(({ alerts, onEdit, onDelete }) => {
     const { sound } = await Audio.Sound.createAsync(
       require('../components/alarm_sound.mp3') // Adicione o caminho do seu arquivo de som
     );
-    setSound(sound); // Salva a instância do som no estado
     await sound.playAsync();
   };
 
-  const closeModal = async () => {
-    if (sound) {
-      await sound.stopAsync(); // Para o som
-      await sound.unloadAsync(); // Descarrega o som da memória
-      setSound(null); // Limpa o estado do som
-    }
+  const closeModal = () => {
     setModalVisible(false); // Fecha o modal ao clicar em "Fechar"
   };
 
@@ -118,11 +111,13 @@ const styles = StyleSheet.create({
     top: 10,
   },
   editButton: {
+    //backgroundColor: 'rgba(255, 255, 255, 0.5)',
     padding: 5,
     borderRadius: 5,
     marginRight: 5,
   },
   deleteButton: {
+    //backgroundColor: 'rgba(255, 0, 0, 0.5)',
     padding: 5,
     borderRadius: 5,
   },

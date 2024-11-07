@@ -1,8 +1,12 @@
 // Menu.js
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, BackHandler } from 'react-native';
 
 const Menu = ({ onClose, onThemeChange }) => {
+  const handleExitApp = () => {
+    BackHandler.exitApp();
+  };
+
   return (
     <TouchableOpacity style={styles.overlay} onPress={onClose}>
       <View style={styles.menu}>
@@ -10,13 +14,7 @@ const Menu = ({ onClose, onThemeChange }) => {
           <Text style={styles.menuItem}>Sobre</Text>
         </TouchableOpacity>
 
-        
-
-        <TouchableOpacity onPress={onThemeChange}>
-          <Text style={styles.menuItem}>Alterar Tema</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => alert('Sair')}>
+        <TouchableOpacity onPress={handleExitApp}>
           <Text style={styles.menuItem}>Sair</Text>
         </TouchableOpacity>
       </View>
